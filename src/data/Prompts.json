@@ -1,0 +1,10 @@
+{
+  "prompts": [
+    {
+      "id": "1",
+      "quote": "The quick brown fox jumps over the lazy dog",
+      "size": 43,
+      "level": 1
+    }
+  ]
+}

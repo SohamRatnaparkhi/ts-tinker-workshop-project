@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "user": {
+        "id": "string2",
+        "username": "string",
+        "email": "string",
+        "password": "string"
+      },
+      "level": 1,
+      "wpm": 0,
+      "accuracy": 0
+    }
+  ]
+}
