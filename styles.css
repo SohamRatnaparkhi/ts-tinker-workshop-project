@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&family=Goldman:wght@700&family=The+Girl+Next+Door&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+    min-height: 100vh;
+    background-color: #3a9ecd;
+
+    font-family: 'Goldman', cursive;
+}
+
+.container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(134.33deg, #FF9482 1.14%, #7D77FF 100%);
+    /* background-color: #3AA6B9; */
+    padding: 1.5rem;
+    border-width: 10px;
+    border-color: black;
+    border-radius: 12px;
+    min-height: 70vh;
+    min-width: 80vw;
+
+    box-shadow: 10px;
+    
+}
+
+.refer-text{
+    margin-bottom: 3rem;
+    margin-left: calc(1.5rem + 2px);
+    margin-right: calc(1.5rem + 2px);
+}
+.text-quote{
+    /* opacity: 0; */
+    background-color: transparent;
+    border: 2px solid rgb(58, 58, 58);
+    border-radius: 12px;
+
+    text-align: center;
+    font-family: 'Goldman', cursive;
+    font-size: 1rem;
+
+    width: 100%;
+    margin: auto;
+    resize: none;
+    padding: 1rem 1.5rem;
+}
+
+.timer{
+    padding: 2rem;
+    font-size: xx-large;
+}
