@@ -35,3 +35,13 @@ interface UserDetails {
     accuracy: number,
     level: number,
 }
+
+/**
+Example of a TypePrompt:
+{
+    "id": "1",
+    "quote": "The quick brown fox jumps over the lazy dog",
+    "size": 43,
+    "level": 1
+}
+ */
