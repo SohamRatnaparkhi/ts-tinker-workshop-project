@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": "string",
+      "username": "string",
+      "email": "string",
+      "password": "string"
+    },
+    {
+      "id": "string2",
+      "username": "string",
+      "email": "string",
+      "password": "string"
+    }
+  ]
+}
