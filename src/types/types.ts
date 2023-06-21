@@ -34,6 +34,8 @@ interface UserDetails {
     wpm: number,
     accuracy: number,
     level: number,
+    attempts: number,
+    scores: number
 }
 
 /**
