@@ -2,6 +2,19 @@
   "users": [
     {
       "user": {
+        "id": "string3",
+        "username": "string",
+        "email": "string",
+        "password": "string"
+      },
+      "level": 2,
+      "wpm": 82,
+      "accuracy": 0.5,
+      "attempts": 3,
+      "scores": 0
+    },
+    {
+      "user": {
         "id": "string2",
         "username": "string",
         "email": "string",
@@ -9,18 +22,35 @@
       },
       "level": 1,
       "wpm": 0,
-      "accuracy": 0
+      "accuracy": 0,
+      "attempts": 0,
+      "scores": 0
     },
     {
       "user": {
-        "id": "string3",
+        "id": "string1",
         "username": "string",
         "email": "string",
         "password": "string"
       },
       "level": 1,
-      "wpm": 0,
-      "accuracy": 0
+      "wpm": 82,
+      "accuracy": 0.5,
+      "attempts": 3,
+      "scores": 92.25
+    },
+    {
+      "user": {
+        "id": "string4",
+        "username": "string",
+        "email": "string",
+        "password": "string"
+      },
+      "level": 1,
+      "wpm": 123,
+      "accuracy": 0.75,
+      "attempts": 1,
+      "scores": 0
     }
   ]
 }

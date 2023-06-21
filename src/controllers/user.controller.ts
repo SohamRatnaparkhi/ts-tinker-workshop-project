@@ -8,6 +8,8 @@ const createUser = async (req: Request, res: Response) => {
         level: 1,
         wpm: 0,
         accuracy: 0,
+        attempts: 0,
+        scores: 0,
     }
     try {
         const previousUsers = fs.readFileSync('src/data/Users.json', 'utf-8');

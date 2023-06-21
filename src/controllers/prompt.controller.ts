@@ -39,8 +39,13 @@ const matchPrompt = async (req: Request, res: Response) => {
         const previousUsers = fs.readFileSync('src/data/Users.json', 'utf-8');
         const users = JSON.parse(previousUsers);
         const userById: UserDetails = users.users.filter((user: UserDetails) => user.user.id === userId)[0];
-        userById.wpm = (userById.wpm + wpm) / 2;
-        userById.accuracy = (userById.accuracy + ((promptArray.length - errors) / promptArray.length)) / 2;
+        userById.attempts++;
+        userById.wpm += wpm;
+        userById.wpm /= userById.attempts;
+        userById.accuracy = (userById.accuracy + ((promptArray.length - errors) / promptArray.length)) / userById.attempts;
+        userById.scores += wpm * ((promptArray.length - errors) / promptArray.length);
+        fs.writeFileSync('src/data/Users.json', JSON.stringify(users, null, 2), 'utf-8'); 
+
         res.status(200).json({
             errors: errors,
             accuracy: (promptArray.length - errors) / promptArray.length,
