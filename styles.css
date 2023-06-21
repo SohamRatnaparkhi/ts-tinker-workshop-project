@@ -16,6 +16,22 @@ body {
 
     font-family: 'Goldman', cursive;
 }
+.profile{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-11, linear-gradient(134deg, #FF9897 0%, #F650A0 100%));
+    padding: 2rem;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 100%;
+    text-align: center;
+    font-size: x-large;
+    border: 1px solid black;
+    color:rgba(1, 53, 113, 0.909) ;
+}
 
 .container{
     position: relative;
@@ -61,4 +77,68 @@ body {
 .timer{
     padding: 2rem;
     font-size: xx-large;
+}
+
+.grid-align{
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-gap: 3rem;
+}
+
+.green-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.5rem;
+    border: 0.5px solid gray;
+    border-radius: 12px;
+    background-color: rgb(3, 176, 3);
+    color: aliceblue;
+    font-family: 'Goldman', cursive;
+}
+
+.red-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    height: 2rem;
+    padding: 0.5rem;
+    border: 0.5px solid gray;
+    border-radius: 12px;
+    background-color: rgb(227, 77, 82);
+    color: aliceblue;
+    font-family: 'Goldman', cursive;
+}
+
+.field{
+    background-color: transparent;
+    border: 2px solid rgb(58, 58, 58);
+    border-radius: 8px;
+    width: 100%;
+    font-weight: 600;
+    margin: auto;
+    padding: 0.25rem 0.5rem;
+}
+
+.profile-label{
+    text-decoration:solid;
+}
+
+.profile-content{
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 0.25rem 0.5rem;
+}
+
+.span{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    gap: 5rem;
 }

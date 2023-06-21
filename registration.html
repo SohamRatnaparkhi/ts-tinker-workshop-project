@@ -7,23 +7,26 @@
     <title>Typing Flash</title>
 </head>
 <body>
-    <div class="registration-cont">
-        <h4>Register Yourself!</h4>
-
+    <div class="registration-cont ">
+        <center><h3>Register Yourself!</h3></center>
+        <div class="container grid-align">
         <div class="reg-username">
             <label for="reg_username">Username: </label>
-            <input type="text" name="reg_username" class="reg-username-field">
-        </div>
+            <input type="text" name="reg_username" id="regUsername" class="reg-username field">
+        </div><br>
 
         <div class="reg-password">
             <label for="reg_password">Password: </label>
-            <input type="password" name="reg_password" id="" class="reg-password-field">
-        </div>
+            <input type="password" name="reg_password" id="regPassword" class="reg-password field">
+        </div><br>
         
         <div class="reg-confirm-password">
             <label for="reg_confirm_password">Confirm-password: </label>
-            <input type="password" name="reg_confirm_password" class="reg-confirm-password-field">
+            <input type="password" name="reg_confirm_password" id="regConfirmPassword" class="reg-confirm-password field">
         </div>
+        <br>
+        <button type="submit" class="green-button" id="registerBtn">Register</button>
+    </div>
     </div>
 </body>
 </html>
