@@ -1,6 +1,6 @@
 let referPromptInnerText: any;
 
-const referPromptElement = document.getElementById('referPrompt');
+const referPromptElement = document.getElementById('referPrompt') as HTMLDivElement;
 const inputPromptElement = document.getElementById('promptField') as HTMLInputElement;
 const timerElement = document.getElementById('timer');
 
@@ -58,10 +58,13 @@ inputPromptElement?.addEventListener('input',  async () => {
             })
         }
         if(correct || countDown === 0){
+            const userWPM = wpm();
             timerElement!.innerText = '0';
             console.log("Good! Proceed!");
-            console.log(`WPM: ${wpm()}`)
-            if(wpmElement) wpmElement.innerText = wpm().toString();
+            console.log(`WPM: ${userWPM}`)
+            if(wpmElement) wpmElement.innerText = userWPM.toString();
+            const data = await postGameData();
+            console.log(data); 
             
             setTimeout(async () => {
 
@@ -70,7 +73,6 @@ inputPromptElement?.addEventListener('input',  async () => {
                 console.log(userChoice)
                 if(userChoice == 'n') window.location.href = "profile.html";
                 else {
-                    const data = await postGameData();
                     console.log(data);
                 }
             }, 5000);

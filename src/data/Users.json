@@ -100,6 +100,18 @@
       "accuracy": 0.05013271208629428,
       "attempts": 21,
       "scores": 451
+    },
+    {
+      "user": {
+        "username": "sohamr",
+        "password": "sohamr",
+        "id": "sohamrsohamr"
+      },
+      "level": 1,
+      "wpm": 20.35866870590829,
+      "accuracy": 0.112740850197001763,
+      "attempts": 10,
+      "scores": 2369
     }
   ]
 }

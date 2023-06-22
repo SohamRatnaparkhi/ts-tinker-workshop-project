@@ -43,14 +43,14 @@ const user_accuracy = document.getElementById('user_accuracy');
 const user_attempts = document.getElementById('user_attempts') as HTMLElement;
 const user_scores = document.getElementById('user_scores') as HTMLElement;
 
-let userFetch: UserDetails;
 
 async function getUserById () {
     // console.log("object")
     // console.log(localStorage.getItem('userId'));
     const user = await fetch(USER_API_ENDPOINT + "/" + localStorage.getItem('userId'));
     const userData = await user.json();
-
+    
+    let userFetch: UserDetails;
     userFetch = userData.user[0];
     // console.log(userData.user[0])
 
