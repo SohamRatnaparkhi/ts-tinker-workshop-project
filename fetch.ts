@@ -125,3 +125,7 @@ function wpm() {
     const wordsPerMinute = Math.floor(wordsPerSecond*60);
     return wordsPerMinute;
 } 
+
+export{
+    wpm
+}
