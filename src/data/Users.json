@@ -3,9 +3,9 @@
     {
       "user": {
         "id": "string3",
-        "username": "string",
+        "username": "string1",
         "email": "string",
-        "password": "string"
+        "password": "string1"
       },
       "level": 2,
       "wpm": 82,
@@ -50,6 +50,31 @@
       "wpm": 123,
       "accuracy": 0.75,
       "attempts": 1,
+      "scores": 0
+    },
+    {
+      "user": {
+        "id": "string4",
+        "username": "string",
+        "email": "string",
+        "password": "string"
+      },
+      "level": 1,
+      "wpm": 0,
+      "accuracy": 0,
+      "attempts": 0,
+      "scores": 0
+    },
+    {
+      "user": {
+        "username": "Tanjiro",
+        "password": "tatakaye",
+        "id": "Tanjirotatakaye"
+      },
+      "level": 1,
+      "wpm": 0,
+      "accuracy": 0,
+      "attempts": 0,
       "scores": 0
     }
   ]

@@ -1,4 +1,4 @@
-let referPromptInnerText: string;
+let referPromptInnerText: any;
 
 const referPromptElement = document.getElementById('referPrompt');
 const inputPromptElement = document.getElementById('promptField') as HTMLInputElement;
@@ -64,7 +64,7 @@ async function fetchQuote() {
 
         if(referPromptElement){
             // referPromptElement.innerText = data.prompts[0].quote;
-            // console.log("DATA: "+ data.prompts[0].quote);
+            console.log("DATA: "+ data.prompts[0].quote);
          
             referPromptInnerText = data.prompts[0].quote;
             
@@ -85,7 +85,7 @@ async function useFetchedData() {
         //   console.log('Fetched Quote:', referPromptInnerText );
         referPromptElement.innerText = '';
 
-        referPromptInnerText.split('').forEach(character => {
+        referPromptInnerText.split('').forEach((character: string) => {
             const characterSpan = document.createElement('span');
         //    characterSpan.classList.add('correct');
             characterSpan.innerText = character;
@@ -106,11 +106,11 @@ let startTime: any;
 
 function startTimer() {
     if(timerElement)
-        timerElement.innerText = '0';
+        timerElement.innerText = '300';
         startTime = new Date();
 
         setInterval(() => {
-            if(timerElement) timerElement.innerText = getTimerTime().toString();
+            if(timerElement) timerElement.innerText = (300 - getTimerTime()).toString();
         }, 1000);
 }
 
@@ -126,6 +126,6 @@ function wpm() {
     return wordsPerMinute;
 } 
 
-export{
-    wpm
-}
+// export{
+//     wpm
+// }
