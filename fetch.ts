@@ -9,6 +9,13 @@ const wpmElement = document.getElementById('wordsPerMin');
 
 const PROMT_API_ENDPOINT:string = 'http://localhost:3000/api/prompt/'
 
+let continueNext: boolean = false;
+
+setTimeout(() => {
+    referPromptElement!.innerText = 'Loading... Starting in 5 seconds';
+    continueNext = true;
+    useFetchedData();
+}, 5000);
 
 // Type check:
 inputPromptElement?.addEventListener('input',  async () => {
@@ -29,10 +36,10 @@ inputPromptElement?.addEventListener('input',  async () => {
                 const char = arrayValue[index];
                 // console.log(char);
 
-                // if(arrayValue.length === promptArray.length){
-                //     correct = true;
-                //     return;
-                // }
+                if(arrayValue.length === promptArray.length){
+                    correct = true;
+                    return;
+                }
 
                 if(char == null){
                     characterSpan.classList.remove('correct');
@@ -51,19 +58,23 @@ inputPromptElement?.addEventListener('input',  async () => {
             })
         }
         if(correct || countDown === 0){
+            timerElement!.innerText = '0';
             console.log("Good! Proceed!");
             console.log(`WPM: ${wpm()}`)
             if(wpmElement) wpmElement.innerText = wpm().toString();
             
-            timerElement!.innerText = '0';
             setTimeout(async () => {
+
                 console.log("This will be delayed!")
-                const data = await postGameData();
                 const userChoice = prompt("Do you want to continue? y/n");
                 console.log(userChoice)
                 if(userChoice == 'n') window.location.href = "profile.html";
-
+                else {
+                    const data = await postGameData();
+                    console.log(data);
+                }
             }, 5000);
+
             // console.log('Match data:'+data);
         }
     
@@ -82,7 +93,7 @@ async function fetchQuote() {
         if(referPromptElement){
             // referPromptElement.innerText = data.prompts[0].quote;
             console.log("DATA: "+ data.prompts[0].quote);
-         
+        
             referPromptInnerText = data.prompts[0].quote;
             
             const wordArray = data.prompts[0].quote.split(" ");
@@ -112,11 +123,12 @@ async function useFetchedData() {
         startTimer();
         
     } else {
-      console.log('No fetched quote available');
+        console.log('No fetched quote available');
     }
-  }
+}
 
-useFetchedData();
+if(continueNext)
+    useFetchedData();
 
 // Timer: -------------------------------------------------------------------------------------
 let startTime: any;

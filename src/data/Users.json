@@ -8,10 +8,10 @@
         "password": "string1"
       },
       "level": 2,
-      "wpm": 82,
-      "accuracy": 0.5,
-      "attempts": 3,
-      "scores": 0
+      "wpm": 1.2182539682539684,
+      "accuracy": 0.1011711860670194,
+      "attempts": 9,
+      "scores": 102.22222222222223
     },
     {
       "user": {
