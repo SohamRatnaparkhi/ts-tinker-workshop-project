@@ -88,6 +88,18 @@
       "accuracy": 0.6666666666666666,
       "attempts": 3,
       "scores": 70
+    },
+    {
+      "user": {
+        "username": "Giyu",
+        "password": "tomiyoka",
+        "id": "Giyutomiyoka"
+      },
+      "level": 1,
+      "wpm": 1.501744144451079,
+      "accuracy": 0.05013271208629428,
+      "attempts": 21,
+      "scores": 451
     }
   ]
 }

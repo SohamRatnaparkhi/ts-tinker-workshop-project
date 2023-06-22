@@ -18,7 +18,7 @@ inputPromptElement?.addEventListener('input',  async () => {
     // if(referPromptElement && inputPromptElement.textContent){
         const promptArray = referPromptElement?.querySelectorAll('span');
         const arrayValue = inputPromptElement.value.split('');
-        console.log(inputPromptElement.textContent)
+        // console.log(inputPromptElement.value)
 
         let correct: boolean = true;
         
@@ -28,6 +28,11 @@ inputPromptElement?.addEventListener('input',  async () => {
 
                 const char = arrayValue[index];
                 // console.log(char);
+
+                // if(arrayValue.length === promptArray.length){
+                //     correct = true;
+                //     return;
+                // }
 
                 if(char == null){
                     characterSpan.classList.remove('correct');
@@ -42,14 +47,24 @@ inputPromptElement?.addEventListener('input',  async () => {
                     correct = false;
                 }
 
+
             })
         }
         if(correct || countDown === 0){
             console.log("Good! Proceed!");
             console.log(`WPM: ${wpm()}`)
             if(wpmElement) wpmElement.innerText = wpm().toString();
+            
+            timerElement!.innerText = '0';
+            setTimeout(async () => {
+                console.log("This will be delayed!")
+                const data = await postGameData();
+                const userChoice = prompt("Do you want to continue? y/n");
+                console.log(userChoice)
+                if(userChoice == 'n') window.location.href = "profile.html";
 
-            await postGameData();
+            }, 5000);
+            // console.log('Match data:'+data);
         }
     
 })
@@ -114,7 +129,7 @@ function startTimer() {
         startTime = new Date();
 
         setInterval(() => {
-            if(timerElement) timerElement.innerText = (300 - getTimerTime()).toString();
+            timerElement!.innerText = (300 - getTimerTime()).toString();
         }, 1000);
 }
 
@@ -139,6 +154,7 @@ function wpm() {
 async function postGameData () {
 
     console.log('post game request')
+    
     const gameData = await fetch(PROMT_API_ENDPOINT + '/match', {
         method: 'POST',
         body: JSON.stringify({
@@ -151,8 +167,11 @@ async function postGameData () {
         headers: {
             'Content-Type': 'application/json'
         }
+
     });
 
     const responseGameData = await gameData.json();
     console.log(responseGameData);
+
+    return responseGameData;
 }
