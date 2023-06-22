@@ -76,6 +76,18 @@
       "accuracy": 0,
       "attempts": 0,
       "scores": 0
+    },
+    {
+      "user": {
+        "username": "Nezuko",
+        "password": "yokattana",
+        "id": "Nezukoyokattana"
+      },
+      "level": 1,
+      "wpm": 13.833333333333334,
+      "accuracy": 0.6666666666666666,
+      "attempts": 3,
+      "scores": 70
     }
   ]
 }

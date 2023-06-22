@@ -7,11 +7,11 @@ const timerElement = document.getElementById('timer');
 const wpmElement = document.getElementById('wordsPerMin');
 
 
-const PROMT_API_ENDPOINT:string = 'http://localhost:3000/api/prompt/level/1'
+const PROMT_API_ENDPOINT:string = 'http://localhost:3000/api/prompt/'
 
 
 // Type check:
-inputPromptElement?.addEventListener('input', () => {
+inputPromptElement?.addEventListener('input',  async () => {
 
     // console.log('Event listener started:')
 
@@ -44,10 +44,12 @@ inputPromptElement?.addEventListener('input', () => {
 
             })
         }
-        if(correct){
+        if(correct || countDown === 0){
             console.log("Good! Proceed!");
             console.log(`WPM: ${wpm()}`)
             if(wpmElement) wpmElement.innerText = wpm().toString();
+
+            await postGameData();
         }
     
 })
@@ -57,7 +59,7 @@ let wordLength: number = 0;
 // Fetching quote from the API:
 async function fetchQuote() {
     try{
-        const response = await fetch(PROMT_API_ENDPOINT);
+        const response = await fetch(PROMT_API_ENDPOINT+ 'level/1');
         const data = await response.json();
 
         // console.log(wordLength)
@@ -104,6 +106,8 @@ useFetchedData();
 // Timer: -------------------------------------------------------------------------------------
 let startTime: any;
 
+let countDown: any = (300 - getTimerTime());
+
 function startTimer() {
     if(timerElement)
         timerElement.innerText = '300';
@@ -129,3 +133,26 @@ function wpm() {
 // export{
 //     wpm
 // }
+
+// send gameData to backend:
+
+async function postGameData () {
+
+    console.log('post game request')
+    const gameData = await fetch(PROMT_API_ENDPOINT + '/match', {
+        method: 'POST',
+        body: JSON.stringify({
+            "prompt": referPromptInnerText,
+            "text": inputPromptElement.value,
+            "userId": localStorage.getItem('userId'),
+            "wpm": wpm()
+        }),
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const responseGameData = await gameData.json();
+    console.log(responseGameData);
+}
