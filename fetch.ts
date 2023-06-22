@@ -1,4 +1,4 @@
-let referPromptInnerText;
+let referPromptInnerText: string;
 
 const referPromptElement = document.getElementById('referPrompt');
 const inputPromptElement = document.getElementById('promptField') as HTMLInputElement;
@@ -125,3 +125,7 @@ function wpm() {
     const wordsPerMinute = Math.floor(wordsPerSecond*60);
     return wordsPerMinute;
 } 
+
+export{
+    wpm
+}

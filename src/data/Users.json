@@ -34,10 +34,10 @@
         "password": "string"
       },
       "level": 1,
-      "wpm": 82,
-      "accuracy": 0.5,
-      "attempts": 3,
-      "scores": 92.25
+      "wpm": 34.85,
+      "accuracy": 0.2125,
+      "attempts": 5,
+      "scores": 276.75
     },
     {
       "user": {
