@@ -18,7 +18,7 @@ const getPromptById = async (req: Request, res: Response) => {
     try {
         const previousPrompts = fs.readFileSync('src/data/Prompts.json', 'utf-8');
         const prompts = JSON.parse(previousPrompts);
-        const promptById = prompts.prompts.filter((prompt: TypePrompt) => prompt.id === id);
+        const promptById = prompts.prompts.filter((prompt: TypePrompt) => prompt.id === id)[0];
         res.status(200).json({prompt: promptById});
     } catch (error) {
         res.status(500).json({message: error.message});
