@@ -22,7 +22,7 @@ const createUser = async (req: Request, res: Response) => {
     }
 }
 
-const getUserById = async (req: Request, res: Response) => {
+const getUserById = (req: Request, res: Response) => {
     const id = req.params.id;
     try {
         const previousUsers = fs.readFileSync('src/data/Users.json', 'utf-8');
@@ -34,7 +34,25 @@ const getUserById = async (req: Request, res: Response) => {
     }
 }
 
+const loginUser = (req: Request, res: Response) => {
+    const { username, password } = req.body;
+    try {
+        const previousUsers = fs.readFileSync('src/data/Users.json', 'utf-8');
+        const users: UserDetails[] = JSON.parse(previousUsers).users;
+        const user = users.filter((user: UserDetails) => user.user.username === username && user.user.password === password);
+
+        if (user.length === 0) {
+            res.status(404).json({message: 'User not found'});
+            return;
+        }
+        return res.status(200).json({user: user[0]});
+    } catch (error) {
+        return res.status(500).json({message: error.message});
+    }
+}
+
 export {
     createUser,
     getUserById,
+    loginUser
 }
