@@ -54,11 +54,11 @@ body {
 }
 
 .refer-text{
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
+    flex-direction: row; */
     
     width: 100%;
-    padding: 0rem 1.5rem;
+    padding: 0rem calc(1.5rem + 2px);
     margin-bottom: 2rem;
     margin-left: calc(1.5rem + 2px);
     margin-right: calc(1.5rem + 2px);
@@ -81,7 +81,7 @@ body {
 }
 
 .timer{
-    padding: 2rem;
+    padding: 1rem;
     font-size: xx-large;
 }
 
@@ -156,4 +156,12 @@ body {
 .incorrect{
     color: red;
     text-decoration: underline;
+}
+
+.wpm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 1.5rem;
+    margin-bottom: 1rem;
 }
