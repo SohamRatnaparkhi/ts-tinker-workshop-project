@@ -1,4 +1,4 @@
-let referPromptInnerText;
+let referPromptInnerText: string;
 
 const referPromptElement = document.getElementById('referPrompt');
 const inputPromptElement = document.getElementById('promptField') as HTMLInputElement;
