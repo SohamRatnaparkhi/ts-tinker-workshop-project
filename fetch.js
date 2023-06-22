@@ -37,14 +37,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var referPromptInnerText;
 var referPromptElement = document.getElementById('referPrompt');
 var inputPromptElement = document.getElementById('promptField');
+var timerElement = document.getElementById('timer');
+var wpmElement = document.getElementById('wordsPerMin');
 var PROMT_API_ENDPOINT = 'http://localhost:3000/api/prompt/level/1';
+// Type check:
 inputPromptElement === null || inputPromptElement === void 0 ? void 0 : inputPromptElement.addEventListener('input', function () {
     // console.log('Event listener started:')
     // if(referPromptElement && inputPromptElement.textContent){
     var promptArray = referPromptElement === null || referPromptElement === void 0 ? void 0 : referPromptElement.querySelectorAll('span');
     var arrayValue = inputPromptElement.value.split('');
     console.log(inputPromptElement.textContent);
-    var correct = false;
+    var correct = true;
     if (promptArray) {
         promptArray.forEach(function (characterSpan, index) {
             var char = arrayValue[index];
@@ -67,11 +70,17 @@ inputPromptElement === null || inputPromptElement === void 0 ? void 0 : inputPro
     }
     if (correct) {
         console.log("Good! Proceed!");
+        console.log("WPM: ".concat(wpm()));
+        if (wpmElement)
+            wpmElement.innerText = wpm().toString();
     }
 });
+// ----------------------------------------------------------------------------------------
+var wordLength = 0;
+// Fetching quote from the API:
 function fetchQuote() {
     return __awaiter(this, void 0, void 0, function () {
-        var response, data, error_1;
+        var response, data, wordArray, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -82,10 +91,14 @@ function fetchQuote() {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = _a.sent();
+                    // console.log(wordLength)
                     if (referPromptElement) {
                         // referPromptElement.innerText = data.prompts[0].quote;
                         // console.log("DATA: "+ data.prompts[0].quote);
                         referPromptInnerText = data.prompts[0].quote;
+                        wordArray = data.prompts[0].quote.split(" ");
+                        wordLength = wordArray.length;
+                        // console.log(wordLength)
                     }
                     return [3 /*break*/, 4];
                 case 3:
@@ -97,6 +110,7 @@ function fetchQuote() {
         });
     });
 }
+// Using quote or prompt in the game:
 function useFetchedData() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -113,6 +127,9 @@ function useFetchedData() {
                             characterSpan.innerText = character;
                             referPromptElement.appendChild(characterSpan);
                         });
+                        if (inputPromptElement)
+                            inputPromptElement.value = "";
+                        startTimer();
                     }
                     else {
                         console.log('No fetched quote available');
@@ -123,3 +140,23 @@ function useFetchedData() {
     });
 }
 useFetchedData();
+// Timer: -------------------------------------------------------------------------------------
+var startTime;
+function startTimer() {
+    if (timerElement)
+        timerElement.innerText = '0';
+    startTime = new Date();
+    setInterval(function () {
+        if (timerElement)
+            timerElement.innerText = getTimerTime().toString();
+    }, 1000);
+}
+function getTimerTime() {
+    return Math.floor((new Date().getTime() - startTime) / 1000);
+}
+//WPM --------------------------------------------------------------------------------------------
+function wpm() {
+    var wordsPerSecond = wordLength / getTimerTime();
+    var wordsPerMinute = Math.floor(wordsPerSecond * 60);
+    return wordsPerMinute;
+}
