@@ -57,7 +57,8 @@ body {
     display: flex;
     flex-direction: row;
     
-    width: 92.5%;
+    width: 100%;
+    padding: 0rem 1.5rem;
     margin-bottom: 2rem;
     margin-left: calc(1.5rem + 2px);
     margin-right: calc(1.5rem + 2px);
@@ -146,4 +147,13 @@ body {
     align-items: center;
     margin: 1rem;
     gap: 5rem;
+}
+
+.correct{
+    color: rgb(5, 117, 12);
+}
+
+.incorrect{
+    color: red;
+    text-decoration: underline;
 }
