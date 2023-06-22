@@ -54,9 +54,14 @@ body {
 }
 
 .refer-text{
-    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
+    
+    width: 92.5%;
+    margin-bottom: 2rem;
     margin-left: calc(1.5rem + 2px);
     margin-right: calc(1.5rem + 2px);
+    text-align: left;
 }
 .text-quote{
     /* opacity: 0; */
@@ -64,7 +69,7 @@ body {
     border: 2px solid rgb(58, 58, 58);
     border-radius: 12px;
 
-    text-align: center;
+    text-align: left;
     font-family: 'Goldman', cursive;
     font-size: 1rem;
 
