@@ -10,6 +10,13 @@ console.log(loginBtn)
 const username = document.getElementById('loginUsername') as HTMLInputElement
 const password = document.getElementById('loginPassword') as HTMLInputElement
 
+const logoutbtn = document.getElementById('logout-btn') as HTMLButtonElement;
+
+logoutbtn?.addEventListener('click', () => {
+    localStorage.removeItem('userId');
+    window.location.href = "login.html";
+});
+
 loginBtn?.addEventListener("click", async () => {
     // console.log("clicked")
     // const userData = await axios.post(USER_API_ENDPOINT + '/login', {
