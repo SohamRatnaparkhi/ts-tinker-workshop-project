@@ -4,7 +4,7 @@ import fs from 'fs';
 const getPromptsByLevel = async (req: Request, res: Response) => {
     const level = Number(req.params.level);
     try {
-        const previousPrompts = fs.readFileSync('src/data/Prompts.json', 'utf-8');
+        const previousPrompts = fs.readFileSync('./data/Prompts.json', 'utf-8');
         const prompts = JSON.parse(previousPrompts);
         const promptsByLevel = prompts.prompts.filter((prompt: TypePrompt) => prompt.level === level);
         res.status(200).json({prompts: promptsByLevel});
@@ -16,7 +16,7 @@ const getPromptsByLevel = async (req: Request, res: Response) => {
 const getPromptById = async (req: Request, res: Response) => {
     const id = req.params.id;
     try {
-        const previousPrompts = fs.readFileSync('src/data/Prompts.json', 'utf-8');
+        const previousPrompts = fs.readFileSync('./data/Prompts.json', 'utf-8');
         const prompts = JSON.parse(previousPrompts);
         const promptById = prompts.prompts.filter((prompt: TypePrompt) => prompt.id === id)[0];
         res.status(200).json({prompt: promptById});
@@ -36,15 +36,15 @@ const matchPrompt = async (req: Request, res: Response) => {
                 errors++;
             }
         }
-        const previousUsers = fs.readFileSync('src/data/Users.json', 'utf-8');
+        const previousUsers = fs.readFileSync('./data/Users.json', 'utf-8');
         const users = JSON.parse(previousUsers);
         const userById: UserDetails = users.users.filter((user: UserDetails) => user.user.id === userId)[0];
         userById.attempts++;
         userById.wpm += wpm;
         userById.wpm /= userById.attempts;
-        userById.accuracy = (userById.accuracy + ((promptArray.length - errors) / promptArray.length)) / userById.attempts;
-        userById.scores += wpm * ((promptArray.length - errors) / promptArray.length);
-        fs.writeFileSync('src/data/Users.json', JSON.stringify(users, null, 2), 'utf-8'); 
+        userById.accuracy = Math.floor(100 * (userById.accuracy + ((promptArray.length - errors) / promptArray.length)) / userById.attempts);
+        userById.scores += Math.floor(wpm * ((promptArray.length - errors) / promptArray.length));
+        fs.writeFileSync('./data/Users.json', JSON.stringify(users, null, 2), 'utf-8'); 
 
         res.status(200).json({
             errors: errors,
