@@ -12,7 +12,7 @@ const PROMT_API_ENDPOINT:string = 'http://localhost:3000/api/prompt/'
 let continueNext: boolean = false;
 
 setTimeout(() => {
-    referPromptElement!.innerText = 'Loading... Starting in 5 seconds';
+    referPromptElement!.innerText = `Loading... Starting in ${(5 - getTimerTime()).toString()} seconds`;
     continueNext = true;
     useFetchedData();
 }, 5000);
