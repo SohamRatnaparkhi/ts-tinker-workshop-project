@@ -5,6 +5,7 @@ const inputPromptElement = document.getElementById('promptField') as HTMLInputEl
 const timerElement = document.getElementById('timer');
 
 const wpmElement = document.getElementById('wordsPerMin');
+const accuracyElment = document.getElementById('accuracy');
 
 
 const PROMT_API_ENDPOINT:string = 'http://localhost:3000/api/prompt/'
@@ -62,7 +63,11 @@ inputPromptElement?.addEventListener('input',  async () => {
             timerElement!.innerText = '0';
             console.log("Good! Proceed!");
             console.log(`WPM: ${userWPM}`)
+
             if(wpmElement) wpmElement.innerText = userWPM.toString();
+            accuracyElment!.innerText = getAccuracy(referPromptInnerText, inputPromptElement.value).toString() + " %"
+
+
             const data = await postGameData();
             console.log(data); 
             
@@ -122,7 +127,7 @@ async function useFetchedData() {
             referPromptElement.appendChild(characterSpan)
         });
         if(inputPromptElement) inputPromptElement.value = "";
-        startTimer();
+        startTimer(100);
         
     } else {
         console.log('No fetched quote available');
@@ -137,13 +142,14 @@ let startTime: any;
 
 let countDown: any = (300 - getTimerTime());
 
-function startTimer() {
+function startTimer(setTo: number) {
     if(timerElement)
-        timerElement.innerText = '300';
+        timerElement.innerText = setTo.toString();
         startTime = new Date();
 
         setInterval(() => {
-            timerElement!.innerText = (300 - getTimerTime()).toString();
+            if(getTimerTime() <= setTo)
+            timerElement!.innerText = (setTo - getTimerTime()).toString();
         }, 1000);
 }
 
@@ -158,6 +164,29 @@ function wpm() {
     const wordsPerMinute = Math.floor(wordsPerSecond*60);
     return wordsPerMinute;
 } 
+
+// Accuracy ----------------------------------------------------------------------------------------
+function getAccuracy(prompt:string, input:string):number{
+
+    const promptArr = prompt.split("")
+    const inputArr = input.split("");
+
+    let matchedChars: number = 0;
+
+    for(let i = 0; i < promptArr.length; i++){
+        if(promptArr[i] === inputArr[i]){
+            matchedChars!++;
+        }
+    }
+
+    console.log(matchedChars);
+
+    const accuracy = matchedChars!/promptArr.length * 100;
+
+    console.log('Accuracy: ' + accuracy);
+
+    return Math.round(accuracy);
+}
 
 // export{
 //     wpm
