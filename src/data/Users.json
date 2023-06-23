@@ -109,9 +109,21 @@
       },
       "level": 1,
       "wpm": 20.35866870590829,
-      "accuracy": 0.112740850197001763,
+      "accuracy": 0.11274085019700177,
       "attempts": 10,
       "scores": 2369
+    },
+    {
+      "user": {
+        "username": "inosuke",
+        "password": "beast",
+        "id": "inosukebeast"
+      },
+      "level": 1,
+      "wpm": 1.6663501913891952,
+      "accuracy": 0.05557022639988787,
+      "attempts": 18,
+      "scores": 648.5555555555555
     }
   ]
 }

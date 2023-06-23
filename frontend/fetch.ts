@@ -5,9 +5,10 @@ const inputPromptElement = document.getElementById('promptField') as HTMLInputEl
 const timerElement = document.getElementById('timer');
 
 const wpmElement = document.getElementById('wordsPerMin');
-
+const accuracyElment = document.getElementById('accuracy');
 
 const PROMT_API_ENDPOINT:string = 'http://localhost:3000/api/prompt/'
+const USER_API_ENDPOINT_MATCH: string = 'http://localhost:3000/api/user'
 
 let continueNext: boolean = false;
 
@@ -28,6 +29,7 @@ inputPromptElement?.addEventListener('input',  async () => {
         // console.log(inputPromptElement.value)
 
         let correct: boolean = true;
+
         
         if(promptArray){
             promptArray.forEach((characterSpan, index) => {
@@ -57,12 +59,18 @@ inputPromptElement?.addEventListener('input',  async () => {
 
             })
         }
+
+        
         if(correct || countDown === 0){
             const userWPM = wpm();
             timerElement!.innerText = '0';
+
             console.log("Good! Proceed!");
             console.log(`WPM: ${userWPM}`)
-            if(wpmElement) wpmElement.innerText = userWPM.toString();
+
+            wpmElement!.innerText = userWPM.toString();
+            accuracyElment!.innerText = getAccuracy(referPromptInnerText, inputPromptElement.value).toString() + " %"
+
             const data = await postGameData();
             console.log(data); 
             
@@ -84,7 +92,7 @@ inputPromptElement?.addEventListener('input',  async () => {
 // ----------------------------------------------------------------------------------------
 let wordLength: number = 0;
 
-// Fetching quote from the API:
+// Fetching from the API: -----------------------------------------------------------------
 async function fetchQuote() {
     try{
         const response = await fetch(PROMT_API_ENDPOINT+ 'level/1');
@@ -108,7 +116,23 @@ async function fetchQuote() {
     }
 }
 
-// Using quote or prompt in the game:
+
+async function fetchUser() {
+    console.log("Fetching user");
+    const user = await fetch(USER_API_ENDPOINT + "/" + localStorage.getItem('userId'));
+    const userData = await user.json();
+    
+    let userFetch: UserDetails;
+    userFetch = userData.user[0].accuracy;
+
+    console.log("Accuracy:" + userFetch);
+
+    return userFetch.accuracy;
+}
+
+
+
+// Using quote or prompt in the game:------------------------------------------------------
 async function useFetchedData() {
     await fetchQuote();
     if (referPromptInnerText && referPromptElement){
@@ -122,7 +146,7 @@ async function useFetchedData() {
             referPromptElement.appendChild(characterSpan)
         });
         if(inputPromptElement) inputPromptElement.value = "";
-        startTimer();
+        startTimer(100);
         
     } else {
         console.log('No fetched quote available');
@@ -137,13 +161,14 @@ let startTime: any;
 
 let countDown: any = (300 - getTimerTime());
 
-function startTimer() {
+function startTimer(setTo: number) {
     if(timerElement)
-        timerElement.innerText = '300';
+        timerElement.innerText = setTo.toString();
         startTime = new Date();
 
         setInterval(() => {
-            timerElement!.innerText = (300 - getTimerTime()).toString();
+            if(getTimerTime() <= setTo)
+            timerElement!.innerText = (setTo - getTimerTime()).toString();
         }, 1000);
 }
 
@@ -159,11 +184,31 @@ function wpm() {
     return wordsPerMinute;
 } 
 
-// export{
-//     wpm
-// }
+//Accuracy ----------------------------------------------------------------------------------------
 
-// send gameData to backend:
+function getAccuracy(prompt:string, input:string):number{
+
+    const promptArr = prompt.split("")
+    const inputArr = input.split("");
+
+    let matchedChars: number = 0;
+
+    for(let i = 0; i < promptArr.length; i++){
+        if(promptArr[i] === inputArr[i]){
+            matchedChars!++;
+        }
+    }
+
+    console.log(matchedChars);
+
+    const accuracy = matchedChars!/promptArr.length * 100;
+
+    console.log('Accuracy: ' + accuracy);
+
+    return Math.round(accuracy);
+}
+
+// send gameData to backend: ------------------------------------------------------------------------------
 
 async function postGameData () {
 
@@ -189,3 +234,5 @@ async function postGameData () {
 
     return responseGameData;
 }
+
+// 
