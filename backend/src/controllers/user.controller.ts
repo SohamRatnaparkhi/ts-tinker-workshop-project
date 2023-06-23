@@ -12,10 +12,10 @@ const createUser = async (req: Request, res: Response) => {
         scores: 0,
     }
     try {
-        const previousUsers = fs.readFileSync('src/data/Users.json', 'utf-8');
+        const previousUsers = fs.readFileSync('./data/Users.json', 'utf-8');
         const users = JSON.parse(previousUsers);
         users.users.push(userDetails);
-        fs.writeFileSync('src/data/Users.json', JSON.stringify(users));
+        fs.writeFileSync('./data/Users.json', JSON.stringify(users));
         res.status(201).json({message: 'User created successfully'});        
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -25,7 +25,7 @@ const createUser = async (req: Request, res: Response) => {
 const getUserById = (req: Request, res: Response) => {
     const id = req.params.id;
     try {
-        const previousUsers = fs.readFileSync('src/data/Users.json', 'utf-8');
+        const previousUsers = fs.readFileSync('./data/Users.json', 'utf-8');
         const users = JSON.parse(previousUsers);
         const userById = users.users.filter((user: UserDetails) => user.user.id === id);
         res.status(200).json({user: userById});
@@ -37,7 +37,7 @@ const getUserById = (req: Request, res: Response) => {
 const loginUser = (req: Request, res: Response) => {
     const { username, password } = req.body;
     try {
-        const previousUsers = fs.readFileSync('src/data/Users.json', 'utf-8');
+        const previousUsers = fs.readFileSync('./data/Users.json', 'utf-8');
         const users: UserDetails[] = JSON.parse(previousUsers).users;
         const user = users.filter((user: UserDetails) => user.user.username === username && user.user.password === password);
 

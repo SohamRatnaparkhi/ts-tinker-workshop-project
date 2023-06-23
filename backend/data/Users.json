@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "user": {
+        "username": "temp",
+        "password": "temp",
+        "id": "temptemp"
+      },
+      "level": 1,
+      "wpm": 14.22638888888889,
+      "accuracy": 14,
+      "attempts": 6,
+      "scores": 134
+    },
+    {
+      "user": {
+        "username": "soham",
+        "password": "abc",
+        "id": "sohamabc"
+      },
+      "level": 1,
+      "wpm": 54,
+      "accuracy": 88,
+      "attempts": 1,
+      "scores": 48
+    }
+  ]
+}
